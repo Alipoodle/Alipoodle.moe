@@ -72,19 +72,6 @@ a, a:hover, a:focus {
     padding: 20px;
     font-size: 50px;
 }
-form {
-    width: 724px;
-    margin: 0 auto;
-    padding-top: 50px;
-}
-input {
-    background-color: inherit;
-    border: 2px solid #5294E2;
-    padding: 10px;
-    width: 700px;
-    font-size: 18px;
-    font-family: 'Roboto'
-}
 blockquote {
     font-size: 22px;
     font-family: 'Bad Script';
