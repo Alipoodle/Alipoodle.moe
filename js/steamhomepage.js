@@ -14,17 +14,17 @@ function startTime() {
     var s = today.getSeconds();
     var day = today.getDay();
     var am_pm = "AM";
-    var greet = "Good Morning, Danish."
+    var greet = "Good Morning, Alipoodle."
     m = checkTime(m);
     s = checkTime(s);
     if(h > 12 && h < 17) {
-        greet = "Good Afternoon, Danish.";
+        greet = "Good Afternoon, Alipoodle.";
     }
     else if(h <= 24) {
-        greet = "Good Evening, Danish.";
+        greet = "Good Evening, Alipodole.";
         if(h == 24 || h == 0) {
             h = 0;
-            greet = "Good Morning, Danish."
+            greet = "Good Morning, Alipoodle."
         }
     }
     h = checkTime(h);
