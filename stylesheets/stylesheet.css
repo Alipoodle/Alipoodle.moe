@@ -60,7 +60,7 @@ a {
 .page-header {
   color: #fff;
   text-align: center;
-  background-color: #159957;
+  background-color: rgb(26, 35, 126);
   background-image: linear-gradient(to bottom right, rgba(26, 35, 126, 0.8) 0%, rgba(0, 184, 212, 0.8) 100%), url(../Images/Header.png) no-repeat;
 }
 
