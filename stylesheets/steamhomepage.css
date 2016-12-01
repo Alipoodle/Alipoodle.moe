@@ -14,7 +14,7 @@ html, body {
 }
 body {
     /*background-color: #273941;*/
-    background-color: #323638;
+    background-color: #262626;
 }
 a, a:hover, a:focus {
     color: inherit;
@@ -82,8 +82,8 @@ form {
     padding-top: 50px;
 }
 input {
-    background-color: inherit;
     border: 2px solid #5294E2;
+    background-color: #222222;
     padding: 10px;
     width: 700px;
     font-size: 18px;
