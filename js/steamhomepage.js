@@ -17,15 +17,14 @@ function startTime() {
     var greet = "Good Morning, Alipoodle."
     m = checkTime(m);
     s = checkTime(s);
-    if(h >= 12 && h < 17) {
-        greet = "Good Afternoon, Alipoodle.";
+    if(h < 12 || h == 24) {
+        greet = "Good Morning, Alipoodle."
     }
+    else if(h >= 12 && h < 17) {
+        greet = "Good Afternoon, Alipoodle.";
+    } 
     else if(h <= 24) {
         greet = "Good Evening, Alipoodle.";
-        if(h == 24 || h == 0) {
-            h = 0;
-            greet = "Good Morning, Alipoodle."
-        }
     }
     h = checkTime(h);
     document.getElementById('clock').innerHTML = h + ":" + m + weekday[day];
