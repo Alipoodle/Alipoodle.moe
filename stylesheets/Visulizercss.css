@@ -1,0 +1,43 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+body {
+  overflow: hidden;
+  background: #efefef;
+}
+
+#Controls {
+  position: absolute;
+  margin: auto;
+  bottom: calc(25% - 22px);
+  left: 0;
+  right: 0;
+  width: 150px;
+  height: 44px;
+  background: #4CAF50;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  line-height: 44px;
+  color: #fff;
+  font-family: 'Oswald';
+  cursor: pointer;
+  user-select: none;
+}
+
+canvas {
+  position: absolute;
+}
+
+#ChromeOnly {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #F44336;
+  text-align: center;
+  line-height: 100vh;
+  font-family: 'Oswald';
+  color: #fff;
+  text-shadow: 0 10px 20px rbga(0, 0, 0, 0.2);
+  font-size: 2vw;
+  visibility: hidden;
+  display: none;
+}
