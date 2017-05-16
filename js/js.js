@@ -1,1 +1,1 @@
-var easter_egg = new Konami('404');
+var easter_egg = new Konami('small.gif');
