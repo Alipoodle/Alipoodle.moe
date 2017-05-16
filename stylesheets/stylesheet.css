@@ -16,8 +16,9 @@ body {
 a {
   color: #0D47A1;
   text-decoration: none; }
-  a:hover {
-    text-decoration: underline; }
+a:hover {
+    text-decoration: none;
+    color: #1565C0; }
 
 .btn {
   display: inline-block;
