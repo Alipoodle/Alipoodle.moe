@@ -14,11 +14,11 @@ body {
   color: #606c71; }
 
 a {
-  color: #0D47A1;
+  color: #1565C0;
   text-decoration: none; }
 a:hover {
     text-decoration: none;
-    color: #1565C0; }
+    color: #0D47A1; }
 
 .btn {
   display: inline-block;
