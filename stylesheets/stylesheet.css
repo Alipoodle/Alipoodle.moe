@@ -56,7 +56,11 @@ a:hover {
     font-size: 0.9rem; }
     .btn + .btn {
       margin-top: 1rem;
-      margin-left: 0; } }
+      margin-left: 0; }
+  .desktop-links {
+    display: none; }
+  .mobile-links {
+    display: block; } }
 
 .page-header {
   color: #fff;
@@ -64,6 +68,8 @@ a:hover {
   background-color: rgb(26, 35, 126);
   background: linear-gradient(to bottom right, rgba(26, 35, 126, 0.8) 0%, rgba(0, 184, 212, 0.8) 100%);
 }
+.mobile-links { display: none; }
+.desktop-links { display: block; }
 
 @media screen and (min-width: 64em) {
   .page-header {
