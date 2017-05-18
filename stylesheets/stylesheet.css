@@ -58,6 +58,9 @@ a:hover {
       margin-top: 1rem;
       margin-left: 0; } }
 
+.mobile-links { display: none; }
+.desktop-links { display: block; }
+
 @media screen and (max-width: 42em) {
     .desktop-links {
       display: none; }
@@ -65,8 +68,7 @@ a:hover {
     .mobile-links {
       display: none; }
   
-.mobile-links { display: none; }
-.desktop-links { display: block; }
+
 
 .page-header {
   color: #fff;
