@@ -34,6 +34,12 @@
     <section class="main-content">
       
 	  <audio src="/mp3/Angel-Lust-Demo.mp3" preload="auto" />
+	  <script src="/audiojs/audio.min.js"></script>
+	  <script>
+		audiojs.events.ready(function() {
+			var as = audiojs.createAll();
+		});
+	</script>
       
       <footer class="site-footer">
         <span class="site-footer-owner">Alipoodle.me is maintained by <a href="https://github.com/Alipoodle">Alipoodle</a>.</span>
@@ -52,12 +58,6 @@
 	ga('create', 'UA-99590247-1', 'auto');
 	ga('send', 'pageview');
 
-	</script>
-	<script src="/audiojs/audio.min.js"></script>
-	<script>
-		audiojs.events.ready(function() {
-			var as = audiojs.createAll();
-		});
 	</script>
   </body>
 </html>
