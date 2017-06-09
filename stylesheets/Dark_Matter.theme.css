@@ -44,10 +44,6 @@ textarea {
 	background-color:rgba(0,0,0,0.3) !important;
 }
 
-.flex-lFgbSz.flex-3B1Tl4.horizontal-2BEEBe.horizontal-2VE-Fw.flex-3B1Tl4.directionRow-yNbSvJ.justifyCenter-29N31w.alignStretch-1hwxMa.noWrap-v6g9vO {
-    background-color: rgba(0,0,0,0.5);
-}
-
 .badge {
 	background-color: #1d6586;
 }
@@ -67,7 +63,7 @@ textarea {
 	display: none;
 }
 
-.layers {
+.layers, .layer {
 	background: transparent !important;
 }
 
@@ -108,7 +104,9 @@ textarea {
 .channel-members { background:rgba(0,0,0,0.9) !important }
 
 /* NSFW Background */
-
+.flex-lFgbSz.flex-3B1Tl4.horizontal-2BEEBe.horizontal-2VE-Fw.flex-3B1Tl4.directionRow-yNbSvJ.justifyCenter-29N31w.alignStretch-1hwxMa.noWrap-v6g9vO {
+    background-color: rgba(0,0,0,0.5);
+}
 
 .webhooks .webhook { background: rgba(0,0,0,0.2); }
 
@@ -1465,6 +1463,22 @@ textarea {
                           |___/     
 */
 
+/* NEW MAGIC SWITCHER */
+.quickswitcher {
+    background-color: rgba(0,0,0,0.7) !important;
+}
+
+.quickswitcher .result.selected {
+    background-color: rgba(0,0,0,0.5) !important;
+}
+.quickswitcher .big-input {
+    background-color: rgba(0,0,0,0.7) !important;
+	box-shadow: 0 2px 5px rgba(0,0,0,.2),0 0 0 1px rgba(0,0,0,.3);
+}
+.quickswitcher.dark .scroller-wrap:before {
+    background-image: linear-gradient(0deg,transparent,rgba(0,0,0,0) 60%,rgba(0,0,0,0));
+}
+
 .deprecated-settings-modal .settings-inner {
     background-color: rgba(0, 0, 0, 0.7);
 }
@@ -2097,11 +2111,6 @@ button.btn.btn-small.btn-clear:hover {
     background: #1D6586;
     color: #fafafa;
 }
-
-
-
-
-
 /* New Settings */
 
 .theme-dark .ui-standard-sidebar-view {
@@ -2113,10 +2122,6 @@ button.btn.btn-small.btn-clear:hover {
 .theme-dark .ui-standard-sidebar-view .content-region {
     background: rgba(0,0,0,0.8);
 }
-
-
-.flex-align-stretch  Remove background 
-
 
 .ui-button.red.outlined {
     background-color: rgba(0,0,0,0.8) !important;
@@ -2211,25 +2216,4 @@ button.btn.btn-small.btn-clear:hover {
 
 .server-row:nth-child(2n+2) {
 	background-color:rgba(0,0,0,0) !important;
-}
-
-
-
-
-
-
-/* NEW MAGIC SWITCHER */
-.quickswitcher {
-    background-color: rgba(0,0,0,0.7) !important;
-}
-
-.quickswitcher .result.selected {
-    background-color: rgba(0,0,0,0.5) !important;
-}
-.quickswitcher .big-input {
-    background-color: rgba(0,0,0,0.7) !important;
-	box-shadow: 0 2px 5px rgba(0,0,0,.2),0 0 0 1px rgba(0,0,0,.3);
-}
-.quickswitcher.dark .scroller-wrap:before {
-    background-image: linear-gradient(0deg,transparent,rgba(0,0,0,0) 60%,rgba(0,0,0,0));
 }
