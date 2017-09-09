@@ -263,9 +263,10 @@ a:hover {
   .site-footer {
     font-size: 0.9rem; } }
 
-h1::before { content: "「"; }
-h1::after { content: "」"; }
-h2:not(.project-tagline)::before { content: "『"; }
-h2:not(.project-tagline)::after { content: "』"; }
+h1::before { content: "「" }
+h1::after { content: "」" }
+h2:not(.project-tagline)::before { content: "『" }
+h2:not(.project-tagline)::after { content: "』"}
+  
 .project-tagline::before { content: "【" }
 .project-tagline::after { content: "】" }
