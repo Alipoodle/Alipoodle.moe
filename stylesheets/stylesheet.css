@@ -268,5 +268,6 @@ h1::after { content: "」" }
 h2:not(.project-tagline)::before { content: "『" }
 h2:not(.project-tagline)::after { content: "』"}
   
-.project-tagline::before { content: "【" }
-.project-tagline::after { content: "】" }
+.project-tagline::before, a.projects::before { content: "【" }
+.project-tagline::after, a.projects::after { content: "】" }
+
