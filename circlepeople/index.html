@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<!-- PRIMARY: #930487      SECONDARY: #DB0AAE -->
+		<title>Circle People</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta property="og:title"       content="Circle-people.com" />
+		<meta property="og:description" content="Circle People - Your one stop shop for all osu! related scores, skins and news!" />
+		<meta property="og:image"       content="https://a.ppy.sh/6364458" />
+		
+		<meta name="theme-color" content="#930487"> <!-- Android Title Bar !-->
+		
+		<link rel="stylesheet" type="text/css" href="css/materialdesignicons.min.css" media="all">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	</head>
+	<style>
+		body {
+		    background: url("./blurbackground.png") no-repeat fixed center;
+			background-size: cover;
+			color: #FAFAFA
+		}
+		a, a:visited, a:active {
+			color: rgba(255,255,255, .5);
+		}
+		a:hover {
+			color: rgba(255,255,255,.75);
+			text-decoration: none;
+		}
+		.primary-bg {
+			background-color: #930487 !important;
+		}
+		.sb-header {
+			background: url("./header.jpg") no-repeat fixed center;
+			background-size: cover;
+			color: #FFF!important;
+			text-align: center!important
+		}
+		@media (min-width: 576px) {
+			.jumbotron {
+				padding: 3rem 2rem;
+			}
+		}
+		.top-pad {
+		    padding-top: 35px;
+		}
+		.footer {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			padding: 1rem;
+			text-align: center;
+		}
+		
+		.social-media a {
+			padding: 0.2rem;
+		}
+		.footer-text {
+			padding-left: 10px;
+			float:left;
+		}
+		.social-media a {
+			float: right;
+		}
+
+	</style>
+	<body>
+		<nav class="navbar navbar-toggleable-md navbar-inverse primary-bg fixed-top">
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#">Circle People</a>
+
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./playlists">Playlists</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./players">Players</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./skins">Skins</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./staff">Staff</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="./about">About</a>
+					</li>
+					<!-- <li class="nav-item">
+						<a class="nav-link disabled" href="#">Disabled</a>
+					</li> 
+					
+					Search To add!-->
+				
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown01">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div class="jumbotron sb-header jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-3 top-pad">Circle People</h1>
+				<p class="lead">Your one stop shop for all osu! related scores, skins and news!</p>
+			</div>
+		</div>
+		
+		<section class="main-content">
+			
+		</section>
+		
+		<div class="footer primary-bg">
+			<div class="social-media">
+				<a href="https://discord.gg/circlepeople" title="Discord"><i class="mdi mdi-discord"></i></a>
+				<a href="https://reddit.com/r/circlepeople" title="Reddit"><i class="mdi mdi-reddit"></i></a>
+				<a href="https://www.facebook.com/CirclePeople/" title="Facebook"><i class="mdi mdi-facebook-box"></i></a>
+				<a href="https://www.twitter.com/CirclePeopleYT" title="Twitter"><i class="mdi mdi-twitter"></i></a>
+				<a href="https://youtube.com/CirclePeople" title="YouTube"><i class="mdi mdi-youtube-play"></i></a>
+				
+			</div><p class="footer-text">Circle People website is made by <a href="https://alipoodle.me/">Alipoodle</a> and the <a href="./staff">Staff</a> at Circle People</p>
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	</body>
