@@ -9,11 +9,10 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0px;
-    /*color: #6dc2a3;*/
     color: #5294E2;
 }
 body {
-    background-color: #262626;
+    background-color: #212121;
 }
 a, a:hover, a:focus {
     color: inherit;
@@ -58,7 +57,7 @@ a, a:hover, a:focus {
 }
 .sites {
     padding: 40px 0px 0px 0px;
-    width: 450px;
+    width: 340px;
     list-style-type: none;
     display: flex;
     margin: 0 auto;
@@ -82,7 +81,7 @@ form {
 }
 input {
     border: 2px solid #5294E2;
-    background-color: #222222;
+    background-color: #262626;
     color: #dbeaff;
     padding: 10px;
     width: 700px;
