@@ -8,9 +8,14 @@ body {
 .content {
   margin-top: 10vh;
 }
+.footer {
+  bottom: 9vh;
+  position: absolute;
+}
 .footer-content {
   position: absolute;
   left:20px;
+  width: 90vw;
 }
 
 @media (max-width: 768px) {
