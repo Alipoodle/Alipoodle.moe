@@ -1,0 +1,33 @@
+body {
+    animation: backgroundColour 15s linear infinite;
+    color: #212121;
+    font-size: 20px;
+    font-family: 'Ubuntu Mono', monospace;
+}
+.content {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 10vh;
+}
+button {
+    border-radius: 15%;
+    border: 0;
+    background-color: #ffffff;
+    color: black;
+    padding: 10px;
+}
+.btnWidth {
+    width:50px;
+}
+
+@keyframes backgroundColour {
+    0% {
+        background-color: #FFD180;
+    }
+    50% {
+        background-color: #FF80AB;
+    }
+    100% {
+        background-color: #FFD180;
+    }
+}

@@ -1,0 +1,174 @@
+<!-- https://stackoverflow.com/questions/28695154/try-to-create-basic-math-game -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css" media="screen">
+</head>
+<body>
+    <div class="content">
+        <center>
+            <h1>&hairsp;Question:</h1>
+
+            <p>What is</p><p id="question">1 + 1</p>
+
+            <button class="btnWidth btn0" id="btn1" onClick="setObjects(document.getElementById('btn1').innerHTML)">Ans 1</button>
+
+            <button class="btnWidth btn1" id="btn2" onClick="setObjects(document.getElementById('btn2').innerHTML)">Ans 2</button>
+
+            <button class="btnWidth btn2" id="btn3" onClick="setObjects(document.getElementById('btn3').innerHTML)">Ans 3</button>
+
+            <p>&hairsp;</p>
+            <p>&hairsp;</p>
+            <p>&hairsp;</p>
+
+            <p>&hairsp;Time left:</p>
+            <p id="timeleft">null</p>
+
+            <p>&hairsp;Score:</p>
+            <p id="score">null/10</p> 
+        </center>
+    </div>
+</body>
+
+<script>
+    var operators = ["+","-", "*", "/"],
+        question = null,
+        points = 0,
+        numQuestions = -1,
+        maxQuestions = 10,
+        stop = false,
+
+        audioSuccess = new Audio('success.mp3'),
+        audioFail = new Audio('fail.mp3'),
+
+        diffLevel = 1,
+        timer,
+        timer2,
+        timer2Loop = 0;
+
+    function rndMath() {
+        var oper = operators[Math.floor(Math.random() * operators.length)]; // Gets Random Operator
+        var num1 = 0;
+        var num2 = 0;
+        var ans = [];
+
+        if (oper == "+") {
+            num1 = Math.floor(Math.random() * 12) + 1; // Get's first random number
+            num2 = Math.floor(Math.random() * 12) + 1; // Get's second rnd number
+
+            ans[0] = num1 + num2;
+            // Enforce more randomness
+            let rng = Math.floor(Math.random() * 3)
+            for (i=1;i<3;i++) {
+                let rng = Math.floor(Math.random() * 2)
+                if (rng == 0)   ans[i] = num1 + num2 + (Math.floor(Math.random() * 3) + 1);
+                else            ans[i] = num1 + num2 - (Math.floor(Math.random() * 3) + 1);
+            }
+        }
+        else if (oper == "*") {
+            num1 = Math.floor(Math.random() * 12) + 1; 
+            num2 = Math.floor(Math.random() * 12) + 1;
+
+            ans[0] = num1 * num2;
+            ans[1] = num1 * (num2 - 1);
+            ans[2] = (num1+ 1) * num2;
+        }
+        else if (oper == "-") {
+            num1 = Math.floor(Math.random() * 12) + 1;
+            num2 = Math.floor(Math.random() * 12) + 1;
+            if(num1<num2){var placeholder=num1;num1=num2;num2=placeholder;} // Swaps around Numbers to make num1 larger to make always posative.
+
+            ans[0] = num1 - num2;
+            for (i=1;i<3;i++) {
+                let rng = Math.floor(Math.random() * 2)
+                if (rng == 0)   ans[i] = num1 - num2 + (Math.floor(Math.random() * 3) + 1);
+                else            ans[i] = num1 - num2 - (Math.floor(Math.random() * 3) + 1);
+            }
+        }
+        else if (oper == "/") {
+            var whole = false;
+            do {
+                num1 = Math.floor(Math.random() * 12) + 1; // Get's first random number
+                num2 = Math.floor(Math.random() * 12) + 1; // Get's second rnd number
+                if ((num1 % num2) == 0) { if (num1 != num2) whole = true; } // Check if gives whole number back to make it more optimal for children.
+            }
+            while (whole == false) // Repeat if not optimal
+
+            ans[0] = num1 / num2;
+            ans[1] = num1 / num2 - (Math.floor(Math.random() * 2) + 1);
+            ans[2] = num1 / num2 + (Math.floor(Math.random() * 2) + 1);
+        }
+
+        console.log("Sum: " + num1 + oper + num2);
+        console.log(`Ans: ${ans[0]} | ${ans[1]} | ${ans[2]}`);
+        console.log(" ");
+
+        return [num1, oper, num2, ans[0], ans[1], ans[2]]; // Returns all the elements required.
+    }  // returns:  num 1, operation, num 2, ans 1, ans 2, ans 3.
+    
+    function setObjects(ans) {
+        window.clearTimeout(timer)
+        clearInterval(timer2)
+        timer2Loop = 0
+        document.getElementById("timeleft").innerHTML = (10*diffLevel)-timer2Loop
+
+        if (stop) return
+
+        if (question) { // Check if a question exists. This is to prevent it from running on the first question.
+            if (question[3] == ans) {
+                audioSuccess.play();
+                points++; // If returned object = answer to the question Add a point
+            } else {
+                audioFail.play();
+            }
+        }
+        
+        numQuestions++; // Total questions
+
+        // Once it has reached max number of questions
+        if (numQuestions == maxQuestions) {
+            stop = true
+            setTimeout(function() {
+                alert(`You sucessfully got ${points}/${numQuestions}`)
+                window.location.href = './index.html'
+            }, 3000)
+        }
+
+        question = rndMath();
+        answers = shuffleAarray([question[3], question[4], question[5]])
+        document.getElementById("question").innerHTML = `${question[0]} ${question[1]} ${question[2]}`;
+        document.getElementById("btn1").innerHTML = answers[0];
+        document.getElementById("btn2").innerHTML = answers[1];
+        document.getElementById("btn3").innerHTML = answers[2];
+        document.getElementById("score").innerHTML = `${points}/${numQuestions}`;
+
+        
+        timer2 = setInterval(function() {
+            if (timer2Loop == (9*diffLevel)+diffLevel ) {
+                setObjects(null)
+            }
+            timer2Loop++;
+            document.getElementById("timeleft").innerHTML = (10*diffLevel)-timer2Loop
+        }, 1000)
+    }
+
+    function shuffleAarray(arr) {
+        var collection = arr,
+            len = arr.length,
+            rng = Math.random,
+            random,
+            temp;
+
+        while (len) {
+            random = Math.floor(rng() * len);
+            len -= 1;
+            temp = collection[len];
+            collection[len] = collection[random];
+            collection[random] = temp;
+        }
+        return collection;
+    }
+    setObjects()
+
+</script>
