@@ -7,9 +7,11 @@ body {
 }
 .content {
   margin-top: 10vh;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 .footer {
-  bottom: 10vh;
+  bottom: 9vh;
   position: absolute;
 }
 .footer-content {
@@ -20,8 +22,8 @@ body {
 
 @media (max-width: 768px) {
   .content {
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }
 svg {
@@ -31,11 +33,10 @@ svg {
 a {
   fill: #0d47a1;
   color:  #0d47a1;
+  text-decoration: none;
 }
 a:hover {
   fill: #0277BD;
   color: #0277BD;
-}
-a:hover {
   text-decoration: none;
 }
