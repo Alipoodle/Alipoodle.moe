@@ -2,33 +2,20 @@
 </pre>
 
 <script>
-    function getCook(cookiename) {
-        // Get name followed by anything except a semicolon
-        var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
-        // Return everything after the equal sign, or an empty string if the cookie name not found
-        return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+    function getCook(cookiename){var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);return decodeURIComponent(!!cookiestring?cookiestring.toString().replace(/^[^=]+./,""):"")}
+    function setCookie(cname,cvalue,exdays){var d=new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));var expires="expires="+d.toUTCString();document.cookie=cname+"="+cvalue+";"+expires+";path=/"}
+    var HttpClient=function(){this.get=function(aUrl,aCallback){var anHttpRequest=new XMLHttpRequest();anHttpRequest.onreadystatechange=function(){if(anHttpRequest.readyState==4&&anHttpRequest.status==200)aCallback(anHttpRequest.responseText)};anHttpRequest.open("GET",aUrl,!0);anHttpRequest.send(null)}}
+    if (!getCook("key")) {
+        do {
+            var apiKey = prompt("Please enter a valid osu-api key", "https://osu.ppy.sh/p/api");
+        } while (apiKey == null || apiKey == "")
+        
+
+        setCookie("key", apiKey, 90)
     }
-    function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    setCookie("key", "04e74138adf8fc305189390e83cf8924c617d9b2", 14)
-    console.log(document.cookie)
     console.log(getCook("key"));
 
-    var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-            }
-            anHttpRequest.open( "GET", aUrl, true );            
-            anHttpRequest.send( null );
-        }
-    }
+    
 
     var key = "04e74138adf8fc305189390e83cf8924c617d9b2";
     var username = "Alipoodle";
