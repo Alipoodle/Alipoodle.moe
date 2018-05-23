@@ -1,0 +1,41 @@
+<pre id="content">
+</pre>
+
+<script>
+    function getCook(cookiename) {
+        // Get name followed by anything except a semicolon
+        var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
+        // Return everything after the equal sign, or an empty string if the cookie name not found
+        return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+    }
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    setCookie("key", "04e74138adf8fc305189390e83cf8924c617d9b2", 14)
+    console.log(document.cookie)
+    console.log(getCook("key"));
+
+    var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+            }
+            anHttpRequest.open( "GET", aUrl, true );            
+            anHttpRequest.send( null );
+        }
+    }
+
+    var key = "04e74138adf8fc305189390e83cf8924c617d9b2";
+    var username = "Alipoodle";
+
+    var client = new HttpClient();
+    client.get(`https://osu.ppy.sh/api/get_user?k=${key}&u=${username}`, function(response) {
+        var player = JSON.parse(response)[0]; // Stored in an array.
+        document.getElementById("content").innerHTML = player.username;
+    });
+</script>
