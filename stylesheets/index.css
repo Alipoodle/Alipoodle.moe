@@ -26,6 +26,20 @@ body {
     margin-right: 5%;
   }
 }
+svg {
+  width: 50px;
+  height: 50px;
+}
+a {
+  fill: #0d47a1;
+  color:  #0d47a1;
+  text-decoration: none;
+}
+a:hover {
+  fill: #0277BD;
+  color: #0277BD;
+  text-decoration: none;
+}
 .d-svg {
   width:18px;
   height:18px; 
@@ -44,18 +58,4 @@ body {
     font-size: 12px;
     margin-left: 18px;
   }
-}
-svg {
-  width: 50px;
-  height: 50px;
-}
-a {
-  fill: #0d47a1;
-  color:  #0d47a1;
-  text-decoration: none;
-}
-a:hover {
-  fill: #0277BD;
-  color: #0277BD;
-  text-decoration: none;
 }
