@@ -1,10 +1,11 @@
-/*@import "https://fontlibrary.org/face/fantasque-sans-mono";*/
-@import 'https://fonts.googleapis.com/css?family=Bad+Script';
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 @font-face {
     font-family: FantasqueSansMonoRegular;
     src: url('../fonts/FantasqueSansMono-Regular.ttf');
 }
-@import 'https://fonts.googleapis.com/css?family=Roboto';
+
 html, body {
     height: 100%;
     width: 100%;
