@@ -27,28 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
   //   });
 
 
-  if (!localStorage.getItem('code')) {
-    fetch(`${prefix}/auth/requestcode`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(appData),
-      timeout: 30000
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        localStorage.setItem('code', data.code);
-
-        getToken();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-  if (!localStorage.getItem('token')) {
-    getToken();
+  if (!localStorage.getItem('code') || !localStorage.getItem('token')) {
+    getCode();
   }
 
   else {
@@ -56,7 +36,42 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+function getCode() {
+  fetch(`${prefix}/auth/requestcode`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(appData),
+    timeout: 30000
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        handleError(data);
+        return;
+      }
+
+      console.log('Successfully got Code', data.code);
+      localStorage.setItem('code', data.code);
+
+      getToken();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
 function getToken() {
+  showInfo(
+    "Authorization Required",
+    [
+      "Please authorize the application to continue. YouTube Music Desktop Player will open a new Window to authorize the application.",
+      "Please check it uses the code below:",
+      `Code: ${localStorage.getItem('code')}`
+    ]
+  );
+
   fetch(`${prefix}/auth/request`, {
     method: 'POST',
     headers: {
@@ -68,15 +83,23 @@ function getToken() {
     }),
     timeout: 30000
   })
-
     .then(response => response.json())
     .then(data => {
+      if (data.error) {
+        handleError(data);
+        return;
+      }
+
+      console.log('Successfully got Token');
       localStorage.setItem('token', data.token);
       getInitialStateAndStart();
     })
     .catch(error => {
       console.error('Error:', error);
-    });
+    })
+    .finally(() => {
+      infoDialog.close();
+    })
 }
 
 function getInitialStateAndStart() {
@@ -87,6 +110,10 @@ function getInitialStateAndStart() {
   })
     .then(response => response.json())
     .then(data => {
+      if (data.error) {
+        handleError(data);
+        return;
+      }
       console.log('Success:', data);
 
       displayState(data);
@@ -106,6 +133,66 @@ function getInitialStateAndStart() {
     displayState(stateData);
   })
 }
+
+const errorDialog = document.getElementById('error-dialog');
+function handleError(data) {
+
+  errorDialog.querySelector('h2').innerText = "Error - " + data.code;
+  switch (data.code) {
+    case 'UNAUTHENTICATED':
+      errorDialog.querySelector('p').innerText = "You are not authenticated. Please try again.";
+      localStorage.removeItem('code');
+      localStorage.removeItem('token');
+      break;
+
+    case 'AUTHORIZATION_TIME_OUT':
+      errorDialog.querySelector('p').innerText = "Authorization request timed out. Please try again.";
+      break;
+
+    case 'AUTHORIZATION_DENIED':
+      errorDialog.querySelector('p').innerText = "Authorization request was denied. Please try again.";
+      break;
+
+    case 'AUTHORIZATION_TOO_MANY':
+      errorDialog.querySelector('p').innerText = "Too many authorization requests. Please try removing some other connections and try again.";
+      break;
+
+    case 'AUTHORIZATION_DISABLED':
+      errorDialog.querySelector('p').innerText = "New Authorizations are currently disabled. Please enable it and try again.";
+      break;
+
+    case 'AUTHORIZATION_INVALID':
+      errorDialog.querySelector('p').innerText = "Authorization code is invalid. Please try again.";
+      break;
+
+    case 'YOUTUBE_MUSIC_UNVAILABLE':
+      errorDialog.querySelector('p').innerText = "YouTube Music is currently unavailable. Please try again later.";
+      break;
+
+    case 'YOUTUBE_MUSIC_TIME_OUT':
+      errorDialog.querySelector('p').innerText = "Request to YouTube Music timed out. Please try again.";
+      break;
+  }
+
+  errorDialog.showModal()
+}
+errorDialog.querySelector('button').addEventListener('click', function() {
+  errorDialog.close();
+});
+
+const infoDialog = document.getElementById('info-dialog');
+function showInfo(title, message) {
+  infoDialog.querySelector('h2').innerText = title;
+  infoDialog.querySelector('p').innerText = (
+    typeof message === "object"
+      ? message.join('\n')
+      : message
+  );
+  infoDialog.showModal();
+}
+infoDialog.querySelector('button').addEventListener('click', function() {
+  infoDialog.close();
+});
 
 var lastState = null;
 function displayState(stateData) {
