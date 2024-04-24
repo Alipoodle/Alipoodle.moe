@@ -1,5 +1,7 @@
 const api_version = 'v1';
-const prefix = `http://localhost:9863/api/${api_version}`;
+const getPrefix = (withVer = true) => {
+  return (`http://${localStorage.getItem('ip')}:9863` || 'http://localhost:9863') + (withVer ? `/api/${api_version}` : '');
+}
 
 const appData = {
   appId: 'ytmd-remote-control',
@@ -9,22 +11,37 @@ const appData = {
 
 document.addEventListener('DOMContentLoaded', function() {
   // Add a Custom CSS property (--control-height) on #control with the height of the window
-  document.getElementById('control').style.setProperty('--control-height', window.outerHeight + 'px');
+  const control = document.getElementById('control');
+
+  control.style.setProperty('--control-height', control.clientHeight + 'px');
   window.addEventListener('resize', () => {
-    document.getElementById('control').style.setProperty('--control-height', window.outerHeight + 'px');
+    control.style.setProperty('--control-height', control.clientHeight + 'px');
   });
 
-  // Check {prefix}/metadata to see if it supports the API Version
-  // fetch(`${prefix}/metadata`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     if (data.apiVersions.indexOf(version) === -1) {
-  //       console.error(`API Version ${version} is not supported by the Client`);
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error('Error:', error);
-  //   });
+  if (!localStorage.getItem('ip')) {
+    let ip = window.prompt(
+      "Please enter the IP Address of the YouTube Music Desktop Player instance",
+      "localhost"
+    );
+
+    if (ip === null) { 
+      handleError({ 'code': 'NO_IP' });
+      return;
+    }
+
+    localStorage.setItem('ip', ip);
+  }
+
+  fetch(`${getPrefix(false)}/metadata`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.apiVersions.indexOf(api_version) === -1) {
+        handleError({ 'code': 'UNSUPPORTED_API' });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 
 
   if (!localStorage.getItem('code') || !localStorage.getItem('token')) {
@@ -37,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getCode() {
-  fetch(`${prefix}/auth/requestcode`, {
+  fetch(`${getPrefix()}/auth/requestcode`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -72,7 +89,7 @@ function getToken() {
     ]
   );
 
-  fetch(`${prefix}/auth/request`, {
+  fetch(`${getPrefix()}/auth/request`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -103,7 +120,7 @@ function getToken() {
 }
 
 function getInitialStateAndStart() {
-  fetch(`${prefix}/state`, {
+  fetch(`${getPrefix()}/state`, {
     headers: {
       'Authorization': localStorage.getItem('token')
     }
@@ -123,7 +140,7 @@ function getInitialStateAndStart() {
     });
 
 
-  var socket = io(`ws://${prefix.replace('http://', '')}/realtime`, {
+  var socket = io(`ws://${getPrefix().replace('http://', '')}/realtime`, {
     auth: {
       token: localStorage.getItem('token')
     },
@@ -137,8 +154,23 @@ function getInitialStateAndStart() {
 const errorDialog = document.getElementById('error-dialog');
 function handleError(data) {
 
+  if (!data.code) {
+    errorDialog.querySelector('h2').innerText = data.error;
+    errorDialog.querySelector('p').innerText = data.message;
+    errorDialog.showModal();
+    return;
+  }
+
   errorDialog.querySelector('h2').innerText = "Error - " + data.code;
   switch (data.code) {
+    case 'NO_IP':
+      errorDialog.querySelector('p').innerText = "No IP Address was provided. Please refresh and try again.";
+      break;
+
+    case 'UNSUPPORTED_API':
+      errorDialog.querySelector('p').innerText = `No supported API Version in current Application. Required Version ${api_version}. Please update YouTube Music Desktop Player.`;
+      break;
+
     case 'UNAUTHENTICATED':
       errorDialog.querySelector('p').innerText = "You are not authenticated. Please try again.";
       localStorage.removeItem('code');
@@ -405,7 +437,7 @@ function sendCommand(command, data = null) {
     body.data = data;
   }
 
-  return fetch(`${prefix}/command`, {
+  return fetch(`${getPrefix()}/command`, {
     method: 'POST',
     headers: {
       'Authorization': localStorage.getItem('token'),
